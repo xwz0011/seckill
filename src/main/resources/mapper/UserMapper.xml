@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xwz.seckill.mapper.UserMapper">
+
+    <select id="queryById" resultType="com.xwz.seckill.pojo.User">
+        select id,nickname, password, slat, head, register_date, last_login_date, login_count from t_user where id = #{id};
+    </select>
+
+</mapper>
