@@ -22,6 +22,7 @@ public class UserArgumentResolve implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         Class<?> type = parameter.getParameterType();
+        System.out.println(type == User.class);
         return type == User.class;
     }
 
@@ -30,10 +31,12 @@ public class UserArgumentResolve implements HandlerMethodArgumentResolver {
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
         HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
         String ticket = CookieUtil.getCookieValue(request, "userTicket");
+        System.out.println("ticket = " + ticket);
         if (StringUtils.isEmpty(ticket)) {
             return null;
         }
         User user = (User) userService.getUserByRedis(ticket, request, response);
+        System.out.println("user = " + user);
         return user;
     }
 }

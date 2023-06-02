@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
         // 将用户信息存储在redis中
         redisTemplate.opsForValue().set("user:"+ticket, user);
         CookieUtil.setCookie(request, response, "userTicket", ticket);
-        return RespBean.success();
+        return RespBean.success(ticket);
     }
 
     @Override

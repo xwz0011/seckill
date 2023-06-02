@@ -27,9 +27,9 @@ public class LoginController {
      * 功能描述：跳转登录页
      * @return 登陆页面
      */
-    @GetMapping("/toLogin")
+    @GetMapping({"/toLogin","/"})
     public String toLogin(){
-        return "/login";
+        return "login";
     }
 
     @PostMapping("/doLogin")

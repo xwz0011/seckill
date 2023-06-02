@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xwz.seckill.mapper.SeckillOrderMapper">
+    <insert id="insertSeckillOrder">
+        insert into t_seckill_order(goods_id,user_id,order_id) values (#{goodsId},#{userId},#{orderId})
+    </insert>
+    <select id="querySeckillOrderByGoodsIdAndUserId" resultType="com.xwz.seckill.pojo.SeckillOrder">
+        select *
+        from t_seckill_order
+        where goods_id = #{goodsId} AND user_id = #{userId}
+    </select>
+</mapper>

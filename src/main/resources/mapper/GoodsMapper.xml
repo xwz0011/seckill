@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xwz.seckill.mapper.GoodsMapper">
+
+    <!--分步查询-->
+    <resultMap id="GoodsAndSeckillGoods2" type="com.xwz.seckill.vo.GoodsVO">
+        <id column="id" property="id"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="goods_title" property="goodsTitle"/>
+        <result column="goods_img" property="goodsImg"/>
+        <result column="goods_detail" property="goodsDetail"/>
+        <result column="goods_price" property="goodsPrice"/>
+        <result column="goods_stock" property="goodsStock"/>
+        <association property="seckillGoods" select="com.xwz.seckill.mapper.SeckillGoodsMapper.querySeckillGoodsByGoodsId" column="id" fetchType="lazy"/>
+    </resultMap>
+    <select id="queryAllGoodsAndSeckillGoods" resultMap="GoodsAndSeckillGoods2">
+        select g.id,g.goods_name,g.goods_title,g.goods_img,g.goods_detail,g.goods_price,g.goods_stock
+        from t_goods g
+    </select>
+    <select id="queryByIdGoodsVo" resultMap="GoodsAndSeckillGoods2">
+        select g.id,g.goods_name,g.goods_title,g.goods_img,g.goods_detail,g.goods_price,g.goods_stock
+        from t_goods g where g.id = #{id}
+    </select>
+
+    <!--连接查询-->
+<!--    <resultMap id="GoodsAndSeckillGoods" type="com.xwz.seckill.vo.GoodsVO">-->
+<!--        <id column="id" property="id"/>-->
+<!--        <result column="goods_name" property="goodsName"/>-->
+<!--        <result column="goods_title" property="goodsTitle"/>-->
+<!--        <result column="goods_img" property="goodsImg"/>-->
+<!--        <result column="goods_detail" property="goodsDetail"/>-->
+<!--        <result column="goods_price" property="goodsPrice"/>-->
+<!--        <result column="goods_stock" property="goodsStock"/>-->
+<!--        <result column="seckill_price" property="seckillPrice"/>-->
+<!--        <result column="stock_count" property="stockCount"/>-->
+<!--        <result column="start_date" property="startDate"/>-->
+<!--        <result column="end_date" property="endDate"/>-->
+<!--    </resultMap>-->
+<!--    <select id="queryAllGoodsAndSeckillGoods" resultMap="GoodsAndSeckillGoods">-->
+<!--        select g.id,g.goods_name,g.goods_title,g.goods_img,g.goods_detail,g.goods_price,g.goods_stock,s.seckill_price, s.stock_count,s.start_date,s.end_date-->
+<!--        from t_goods g left join t_seckill_goods s on g.id = s.goods_id;-->
+<!--    </select>-->
+
+</mapper>
